@@ -1,21 +1,36 @@
-# Routes
+# Brave AI
 
-TanStack Start uses **file-based routing**. Every `.tsx` file in this directory
-defines a route. Do **not** create `src/pages/`, `src/routes/_app/index.tsx`, or
-`app/layout.tsx` — those are Next.js / Remix conventions. The only root layout
-is `src/routes/__root.tsx`.
+Brave AI is an independent TanStack Start web app with streaming chat, saved conversations, model selection, voice input, and an App Builder workflow. It does not require the app builder to build, run, or deploy.
 
-## Conventions
+## Run locally
 
-| File | URL |
-| --- | --- |
-| `index.tsx` | `/` |
-| `about.tsx` | `/about` |
-| `users/index.tsx` | `/users` |
-| `users/$id.tsx` | `/users/:id` (dynamic — bare `$`, no curly braces) |
-| `posts/{-$category}.tsx` | `/posts/:category?` (optional segment) |
-| `files/$.tsx` | `/files/*` (splat — read via `_splat` param, never `*`) |
-| `_layout.tsx` | layout route (renders children via `<Outlet />`) |
-| `__root.tsx` | app shell — wraps every page; preserve `<Outlet />` |
+Requirements: Node.js 20+ and npm.
 
-`routeTree.gen.ts` is auto-generated. Don't edit it by hand.
+```bash
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite.
+
+## Production build
+
+```bash
+npm run build
+npm start
+```
+
+## Environment
+
+Copy `.env.example` to `.env` and fill in your own values. Server-side secrets must stay in the host's environment settings.
+
+- `SUPABASE_URL` / `VITE_SUPABASE_URL`
+- `SUPABASE_PUBLISHABLE_KEY` / `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (server only)
+- `AI_BASE_URL` (for example, an OpenAI-compatible provider endpoint)
+- `AI_API_KEY`
+- `TRANSCRIBE_MODEL` (optional; defaults to `whisper-1`)
+
+## Deployment
+
+The app can be deployed to any host that supports Node.js/TanStack Start and environment variables. A hosted app-builder account is not required.
